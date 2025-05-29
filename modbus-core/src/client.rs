@@ -9,6 +9,8 @@ pub async fn run_client(ip: &str, port: u16) -> Result<(), Box<dyn std::error::E
     // Write value 1234 to holding register at address 0x0001
     let register_address = 0x0003;
     let value_to_write = 1234;
+    let start_addr = 0;
+    let end_addr = 60;
 
     let result = ctx.read_holding_registers(register_address, 1).await?;
     println!("Read back value: {:?}", result);
@@ -16,7 +18,7 @@ pub async fn run_client(ip: &str, port: u16) -> Result<(), Box<dyn std::error::E
     ctx.write_single_register(register_address, value_to_write).await?;
     println!("Wrote value {} to register {}", value_to_write, register_address);
 
-    let data = ctx.read_holding_registers(0, 60).await?;
+    let data = ctx.read_holding_registers(start_addr, end_addr).await?;
     println!("Response: {:?}", data);
     Ok(())
 }
