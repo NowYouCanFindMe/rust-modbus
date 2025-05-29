@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "modbus-core",
+    "modbus-client-bin"
+]
